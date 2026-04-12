@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carmelis Rojas · Consultora en Análisis de Datos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown-dark:  #7A4A1E;
+      --brown-mid:   #C2895A;
+      --camel:       #C8956A;
+      --cream:       #FAF8F0;
+      --cream-dark:  #EDE8D8;
+      --rose:        #EDD5CE;
+      --rose-dark:   #C4958A;
+      --gold:        #C9A84C;
+      --gold-light:  #E8D08A;
+      --text:        #3A2610;
+      --muted:       #7A5C42;
+      --surface:     #ffffff;
+      --border:      rgba(122,74,30,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,240,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--brown-dark); text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; letter-spacing: 0.06em;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--brown-dark); }
+
+    /* HERO */
+    .hero {
+      max-width: 900px; margin: 0 auto;
+      padding: 7rem 2.5rem 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-left {}
+    .hero-tag {
+      display: inline-block; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); background: transparent;
+      border: 1px solid var(--gold-light);
+      padding: 5px 14px; border-radius: 99px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      line-height: 1.1; color: var(--brown-dark);
+      margin-bottom: 1.25rem; font-weight: 600;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--camel);
+    }
+    .hero p {
+      font-size: 15px; color: var(--muted);
+      line-height: 1.8; margin-bottom: 2rem; font-weight: 300;
+    }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+    .pill {
+      font-size: 12px; font-weight: 400; padding: 5px 14px;
+      border-radius: 99px; letter-spacing: 0.04em;
+    }
+    .pill-br { background: var(--cream-dark); color: var(--brown-dark); }
+    .pill-ro { background: var(--rose); color: #7A3A30; }
+    .pill-go { background: #F5EDD0; color: #7A5A10; }
+
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .avatar-wrap {
+      width: 220px; height: 220px; border-radius: 50%;
+      background: var(--rose); border: 6px solid var(--cream);
+      outline: 2px solid var(--rose-dark);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .avatar-initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px; font-weight: 600;
+      color: var(--brown-dark); letter-spacing: 0.04em;
+    }
+    .avatar-ring {
+      position: absolute; inset: -16px; border-radius: 50%;
+      border: 1px dashed var(--gold-light);
+    }
+
+    /* QUOTE BAND */
+    .quote-band {
+      background: var(--brown-dark);
+      padding: 2.5rem 2.5rem;
+      text-align: center;
+    }
+    .quote-band blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      font-style: italic; color: var(--cream);
+      max-width: 700px; margin: 0 auto;
+      line-height: 1.55;
+    }
+    .quote-band cite {
+      display: block; font-family: 'Jost', sans-serif;
+      font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold-light); margin-top: 1rem; font-style: normal;
+    }
+
+    /* METRICS */
+    .metrics-wrap { max-width: 900px; margin: 0 auto; padding: 3rem 2.5rem; }
+    .metrics {
+      display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden;
+    }
+    .metric {
+      background: var(--surface); padding: 1.75rem 1rem;
+      text-align: center;
+    }
+    .metric-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 600; color: var(--brown-dark);
+    }
+    .metric-label { font-size: 12px; color: var(--muted); margin-top: 5px; font-weight: 300; letter-spacing: 0.04em; }
+
+    /* SECTION */
+    section { max-width: 900px; margin: 0 auto; padding: 1rem 2.5rem 4rem; }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: var(--brown-dark); margin-bottom: 2rem; font-weight: 600;
+    }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    .about-text { font-size: 15px; color: var(--muted); line-height: 1.85; font-weight: 300; }
+    .about-text p + p { margin-top: 1rem; }
+    .about-facts { display: flex; flex-direction: column; gap: 14px; }
+    .fact-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.25rem;
+      border-left: 3px solid var(--camel); border-radius: 0 12px 12px 0;
+    }
+    .fact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 4px; }
+    .fact-value { font-size: 14px; color: var(--text); font-weight: 400; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .project-card.card-br::before { background: var(--brown-dark); }
+    .project-card.card-go::before { background: var(--gold); }
+    .project-card.card-ro::before { background: var(--rose-dark); }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(122,74,30,0.1); }
+    .project-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: var(--text); margin-top: 1rem; }
+    .project-card p { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; font-weight: 300; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11px; padding: 3px 10px; border-radius: 6px;
+      background: var(--cream-dark); color: var(--brown-dark); letter-spacing: 0.03em;
+    }
+    .tag-go { background: #F5EDD0; color: #7A5A10; }
+    .tag-ro { background: var(--rose); color: #7A3A30; }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .service-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.75rem 1.25rem; text-align: center;
+      transition: background 0.2s;
+    }
+    .service-card:hover { background: var(--cream-dark); }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--rose); margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .service-card h4 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .service-card p { font-size: 12px; color: var(--muted); line-height: 1.55; font-weight: 300; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .skill-row { display: flex; justify-content: space-between; margin-bottom: 7px; }
+    .skill-name { font-size: 13px; color: var(--text); }
+    .skill-level { font-size: 12px; color: var(--muted); font-weight: 300; }
+    .skill-bar { height: 4px; background: var(--cream-dark); border-radius: 99px; }
+    .skill-fill { height: 4px; border-radius: 99px; background: var(--camel); }
+
+    /* CTA */
+    .cta-section { max-width: 900px; margin: 0 auto 6rem; padding: 0 2.5rem; }
+    .cta-box {
+      background: var(--brown-dark); border-radius: 20px;
+      padding: 3.5rem 2.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-box::after {
+      content: ''; position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(201,168,76,0.08);
+    }
+    .cta-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      color: var(--cream); margin-bottom: 0.75rem; font-weight: 600;
+    }
+    .cta-box p { font-size: 15px; color: var(--cream-dark); margin-bottom: 2rem; font-weight: 300; opacity: 0.85; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 1.5rem; }
+    .contact-item {
+      font-size: 13px; color: var(--gold-light);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .btn {
+      display: inline-block; padding: 12px 28px; border-radius: 10px;
+      font-size: 14px; font-weight: 400; text-decoration: none;
+      cursor: pointer; border: none; transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.04em;
+    }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-primary { background: var(--camel); color: var(--cream); margin-right: 10px; }
+    .btn-outline { background: transparent; border: 1px solid var(--gold-light); color: var(--gold-light); margin-right: 10px; }
+    .btn-wa { background: #25A560; color: #fff; }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem;
+      text-align: center; font-size: 13px; color: var(--muted); font-weight: 300;
+    }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border);
+    }
+    .tl-item { position: relative; padding-bottom: 2.5rem; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -2rem; top: 6px;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: var(--camel); border: 2px solid var(--cream);
+      outline: 1px solid var(--camel);
+    }
+    .tl-dot-gold { background: var(--gold); outline-color: var(--gold); }
+    .tl-dot-rose { background: var(--rose-dark); outline-color: var(--rose-dark); }
+    .tl-badge {
+      display: inline-block; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 99px; margin-bottom: 8px;
+      background: var(--cream-dark); color: var(--brown-dark);
+    }
+    .tl-badge-gold { background: #F5EDD0; color: #7A5A10; }
+    .tl-badge-rose { background: var(--rose); color: #7A3A30; }
+    .tl-title { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .tl-sub { font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 300; font-style: italic; }
+    .tl-desc { font-size: 13px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+    .tl-active .tl-title { color: var(--brown-dark); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    .hero { animation: fadeUp 0.7s ease both; }
+    .quote-band { animation: fadeUp 0.7s 0.1s ease both; }
+    .metrics-wrap { animation: fadeUp 0.7s 0.15s ease both; }
+
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 2rem; gap: 2rem; }
+      .hero-right { display: none; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+      section, .cta-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .metrics-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">Carmelis Rojas</a>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#formacion">Formación</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Consultora Senior · Estadística · 7+ años</div>
+    <h1>Datos que <em>informan</em>,<br>decisiones que impactan.</h1>
+    <p>Estadística especialista en análisis de datos, creación de dashboards e indicadores estratégicos. Transformo información compleja en claridad ejecutiva.</p>
+    <div class="hero-pills">
+      <span class="pill pill-br">Estadística</span>
+      <span class="pill pill-go">Dashboards</span>
+      <span class="pill pill-ro">KPIs ejecutivos</span>
+      <span class="pill pill-br">Análisis de mercado</span>
+      <span class="pill pill-go">Visualización</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <span class="avatar-initials">CR</span>
+    </div>
+  </div>
+</div>
+
+<div class="quote-band">
+  <blockquote>
+    "Sin datos, solo eres otra persona con una opinión."
+    <cite>— W. Edwards Deming</cite>
+  </blockquote>
+</div>
+
+<div class="metrics-wrap">
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-num">7+</div>
+      <div class="metric-label">Años de experiencia</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">C-Suite</div>
+      <div class="metric-label">Nivel de audiencia</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">360°</div>
+      <div class="metric-label">Visión de datos</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">100%</div>
+      <div class="metric-label">Basado en evidencia</div>
+    </div>
+  </div>
+</div>
+
+<section id="sobre-mi">
+  <div class="section-eyebrow">Quién soy</div>
+  <h2 class="section-heading">Sobre mí</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Soy estadística egresada de la Universidad Central de Venezuela (UCV) con más de 7 años de experiencia convirtiendo datos en decisiones. Actualmente trabajo en el área de inteligencia de mercado, generando información estratégica que identifica y potencia nuevas oportunidades de negocio.</p>
+      <p>Me especializo en diseñar sistemas de indicadores ejecutivos, construir dashboards interactivos y desarrollar análisis de mercado con impacto real en la alta dirección. Mi enfoque combina rigor estadístico con comunicación visual efectiva: no solo analizo los números, sino que los hago hablar en el lenguaje de quienes toman decisiones.</p>
+      <p>Soy también emprendedora activa: mi proyecto llegó a semifinales del concurso Ideas del IESA, completando todo el ciclo de formación — una experiencia que reforzó mi visión de cómo los datos pueden ser el motor de nuevos negocios.</p>
+    </div>
+    <div class="about-facts">
+      <div class="fact-item">
+        <div class="fact-label">Especialidad</div>
+        <div class="fact-value">Análisis de datos · Dashboards · KPIs</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Rol actual</div>
+        <div class="fact-value">Especialista en Inteligencia de Mercado</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Formación</div>
+        <div class="fact-value">Lic. Ciencias Estadísticas · UCV</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Audiencia</div>
+        <div class="fact-value">Alta dirección · C-Suite · Equipos estratégicos</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">LinkedIn</div>
+        <div class="fact-value"><a href="https://www.linkedin.com/in/carmelisrojas/" target="_blank" style="color: var(--camel); text-decoration:none;">linkedin.com/in/carmelisrojas</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="section-eyebrow">Trabajo destacado</div>
+  <h2 class="section-heading">Proyectos</h2>
+  <div class="projects-grid">
+
+    <div class="project-card card-br">
+      <h3>Sistema de indicadores ejecutivos</h3>
+      <p>Diseño e implementación de un sistema integral de KPIs para la alta dirección. Los líderes pasaron de reportes manuales a visibilidad en tiempo real de sus métricas más críticas.</p>
+      <div class="project-tags">
+        <span class="tag">Power BI / Tableau</span>
+        <span class="tag">KPIs ejecutivos</span>
+        <span class="tag">Automatización</span>
+      </div>
+    </div>
+
+    <div class="project-card card-go">
+      <h3>Análisis de situación de mercado</h3>
+      <p>Informe estratégico con análisis estadístico del entorno competitivo, tendencias del sector y posicionamiento de la empresa frente a su mercado objetivo.</p>
+      <div class="project-tags">
+        <span class="tag tag-go">Análisis estadístico</span>
+        <span class="tag tag-go">Inteligencia de mercado</span>
+        <span class="tag tag-go">Benchmarking</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="formacion">
+  <div class="section-eyebrow">Trayectoria</div>
+  <h2 class="section-heading">Formación y experiencia</h2>
+  <div class="timeline">
+
+    <div class="tl-item tl-active">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-badge">Actualidad</div>
+        <h3 class="tl-title">Especialista en Inteligencia de Mercado</h3>
+        <p class="tl-sub">Rol actual · Consultoría estratégica</p>
+        <p class="tl-desc">Generación de información estratégica para identificar y capitalizar nuevas oportunidades de negocio. Análisis del entorno competitivo, comportamiento de mercado y tendencias sectoriales para la toma de decisiones ejecutivas.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-badge tl-badge-gold">Certificación</div>
+        <h3 class="tl-title">Semifinalista · Concurso Ideas — Fundación Ideas</h3>
+        <p class="tl-sub">Fundación Ideas</p>
+        <p class="tl-desc">Seleccionada tras la presentación de un resumen ejecutivo para una idea de negocio digital. Completé el ciclo de formación especializada, adquiriendo capacidades transversales en: Inteligencia Artificial, Marketing, Tecnología, Seguridad Digital, Recursos Humanos y Marco Legal. Actualmente, el proyecto se encuentra en fase activa de desarrollo.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-gold"></div>
+      <div class="tl-content">
+        <div class="tl-badge tl-badge-gold">Certificación</div>
+        <h3 class="tl-title">Emprende Tech — IESA</h3>
+        <p class="tl-sub">Instituto de Estudios Superiores de Administración (IESA)</p>
+        <p class="tl-desc">Programa de formación en tecnología y emprendimiento digital. Certificación en desarrollo de proyectos tech con enfoque en negocios, innovación y transformación digital basada en datos.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot tl-dot-rose"></div>
+      <div class="tl-content">
+        <div class="tl-badge tl-badge-rose">Pregrado</div>
+        <h3 class="tl-title">Licenciada en Ciencias Estadísticas</h3>
+        <p class="tl-sub">Universidad Central de Venezuela (UCV)</p>
+        <p class="tl-desc">Formación en fundamentos estadísticos, probabilidad, modelos matemáticos, análisis de datos y métodos cuantitativos aplicados a la toma de decisiones en contextos empresariales y de investigación.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="section-eyebrow">Lo que ofrezco</div>
+  <h2 class="section-heading">Servicios</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A4A1E" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h4>Dashboards interactivos</h4>
+      <p>Visualizaciones ejecutivas en tiempo real adaptadas a tu negocio</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A4A1E" stroke-width="1.7"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h4>Sistema de KPIs</h4>
+      <p>Diseño de indicadores estratégicos y operativos para la alta dirección</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A4A1E" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <h4>Análisis de mercado</h4>
+      <p>Inteligencia competitiva y posicionamiento basado en datos</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A4A1E" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h4>Informes ejecutivos</h4>
+      <p>Reportes de alto impacto para C-Suite y directorios</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A4A1E" stroke-width="1.7"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <h4>Consultoría estadística</h4>
+      <p>Análisis avanzado y modelado estadístico para decisiones complejas</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A4A1E" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h4>Capacitación en datos</h4>
+      <p>Formación de equipos en lectura e interpretación de datos</p>
+    </div>
+  </div>
+</section>
+
+<section id="habilidades">
+  <div class="section-eyebrow">Perfil técnico</div>
+  <h2 class="section-heading">Habilidades</h2>
+  <div class="skills-grid">
+    <div>
+      <div class="skill-row"><span class="skill-name">Análisis estadístico</span><span class="skill-level">Experta</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+    </div>
+    <div>
+      <div class="skill-row"><span class="skill-name">Diseño de dashboards</span><span class="skill-level">Experta</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:93%"></div></div>
+    </div>
+    <div>
+      <div class="skill-row"><span class="skill-name">Indicadores ejecutivos (KPIs)</span><span class="skill-level">Experta</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+    </div>
+    <div>
+      <div class="skill-row"><span class="skill-name">Visualización de datos</span><span class="skill-level">Avanzada</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+    </div>
+    <div>
+      <div class="skill-row"><span class="skill-name">Inteligencia de mercado</span><span class="skill-level">Avanzada</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:87%"></div></div>
+    </div>
+    <div>
+      <div class="skill-row"><span class="skill-name">R / Python / SQL</span><span class="skill-level">Avanzada</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:84%"></div></div>
+    </div>
+    <div>
+      <div class="skill-row"><span class="skill-name">Power BI / Tableau</span><span class="skill-level">Avanzada</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+    </div>
+    <div>
+      <div class="skill-row"><span class="skill-name">Excel avanzado</span><span class="skill-level">Experta</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section" id="contacto">
+  <div class="cta-box">
+    <h2>¿Tienes datos que necesitan hablar?</h2>
+    <p>Conversemos sobre cómo puedo ayudarte a tomar mejores decisiones con tu información.</p>
+    <div class="contact-row">
+      <span class="contact-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472b2e24692426352a222b2e3435282d263407202a262e2b6924282a">[email&#160;protected]</a>
+      </span>
+      <span class="contact-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.54 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +58 414 211 5863
+      </span>
+    </div>
+    <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#117d78723f7270637c747d7862637e7b706251767c70787d3f727e7c">Escribirme</a>
+    <a class="btn btn-outline" href="https://www.linkedin.com/in/carmelisrojas/" target="_blank">LinkedIn</a>
+    <a class="btn btn-wa" href
