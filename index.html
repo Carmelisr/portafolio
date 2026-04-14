@@ -314,14 +314,25 @@
       section, .cta-section { padding-left: 1.5rem; padding-right: 1.5rem; }
       .metrics-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
       nav { padding: 0 1.25rem; }
-      .nav-links { gap: 1rem; }
+.nav-links { display: none; flex-direction: column; position: absolute; top: 62px; left: 0; right: 0; background: rgba(250,248,240,0.98); border-bottom: 1px solid var(--border); padding: 1rem 1.25rem 1.5rem; gap: 1.2rem; z-index: 99; }
+.nav-links.open { display: flex; }
+.hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--brown-dark); border-radius: 2px; transition: all 0.3s; }
+    .hamburger { display: flex !important; }
     }
   </style>
 </head>
+  <script>
+const btn = document.getElementById('hamburger');
+const links = document.querySelector('.nav-links');
+btn.addEventListener('click', () => links.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
 <body>
 
 <nav>
   <a class="nav-brand" href="#">Carmelis Rojas</a>
+<button class="hamburger" id="hamburger" aria-label="Menú" style="display:none"><span></span><span></span><span></span></button>
   <ul class="nav-links">
     <li><a href="#sobre-mi">Sobre mí</a></li>
     <li><a href="#proyectos">Proyectos</a></li>
